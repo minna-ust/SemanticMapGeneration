@@ -28,7 +28,7 @@ class dataExtraction(Config):
         Lboxes=[]
         Sboxes=[]
         divided_masks=[]
-        _,contours,_ = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        contours,_ = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
         for cnt in contours:
             # separate the masks based on their contours
             canvas = np.zeros_like(mask)
@@ -38,7 +38,9 @@ class dataExtraction(Config):
             box = cv2.boxPoints(rect)  
             box = np.int0(np.round(box))
             # adjust the large box according to the rotated angle
-            tuned_x_gap = round(self.x_gap/self.resolution*(1-utils.normfun(rotate_angle%90,24)*33)).astype(np.int)
+            # tuned_x_gap = round(self.x_gap/self.resolution*(1-utils.normfun(rotate_angle%90,24)*33)).astype(np.int)
+            tuned_x_gap = round(self.x_gap/self.resolution*(1-utils.normfun(rotate_angle%90,24)*33))
+            # import ipdb; ipdb.set_trace()
             large_box = utils.calc_box(box,tuned_x_gap,int(self.y_gap/self.resolution),rotate_angle,self.center) 
             Lboxes.append(large_box)
             small_box = utils.calc_box(box,1,1,rotate_angle,self.center)
@@ -109,6 +111,7 @@ class dataExtraction(Config):
                                                 path = self.dir_path[1]+'_'+str(n)+str(l)+'/imgs/'
                                                 utils.mkdir(path)
                                                 cv2.imwrite(path+str(self.unet_count)+'.png',proxi_area)
+                                                # import ipdb; ipdb.set_trace()
                                                 # mask of doorway for u-net
                                                 path = self.dir_path[1]+'_'+str(n)+str(l)+'/masks/'
                                                 utils.mkdir(path)
@@ -143,5 +146,3 @@ if __name__=='__main__':
                 multilevels_maps.append(noise_map)
             noised_maps.append(multilevels_maps)
         extract.data(noised_maps,ref_map,single_mask,rotate_angle,1)
-    
-        

@@ -73,9 +73,11 @@ class addObjects(Config):
             pt =[np.random.choice(np.where(self.room_map==self.colors['white'])[m]) for m in range(2)]
             # calculate the distance between the furniture and wall
             _,binary = cv2.threshold(self.room_map,200,255,cv2.THRESH_BINARY)
-            _,cnt,_  = cv2.findContours(binary,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+            cnt,_  = cv2.findContours(binary,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             main_cnt_index = np.argmax([single_cnt.shape[0] for single_cnt in cnt])
-            dist = cv2.pointPolygonTest(cnt[main_cnt_index],tuple(pt[::-1]),measureDist=True)
+            tmp = pt[::-1]
+            tmp_int = [int(i) for i in tmp]
+            dist = cv2.pointPolygonTest(cnt[main_cnt_index],tuple(tmp_int),measureDist=True)
             if dist>0.25/self.resolution:
                 # use circle to emulate the furniture
                 if np.random.uniform(0,1)>=0.5:
