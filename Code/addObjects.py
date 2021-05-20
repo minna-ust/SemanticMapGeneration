@@ -73,7 +73,7 @@ class addObjects(Config):
             pt =[np.random.choice(np.where(self.room_map==self.colors['white'])[m]) for m in range(2)]
             # calculate the distance between the furniture and wall
             _,binary = cv2.threshold(self.room_map,200,255,cv2.THRESH_BINARY)
-            cnt,_  = cv2.findContours(binary,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+            _,cnt,_  = cv2.findContours(binary,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             main_cnt_index = np.argmax([single_cnt.shape[0] for single_cnt in cnt])
             tmp = pt[::-1]
             tmp_int = [int(i) for i in tmp]

@@ -28,7 +28,7 @@ def main(map_num,noise_types,noise_levels,mode):
         rotate_angle = np.random.randint(0,360)
         addnoise = addNoise(single_map)
         ref_map = addnoise.add_noise('noNoise',rotate_angle,0)
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         for noise in noise_types:
             multilevels_maps = []
             for l in noise_levels:    

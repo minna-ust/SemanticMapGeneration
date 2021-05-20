@@ -28,7 +28,7 @@ class dataExtraction(Config):
         Lboxes=[]
         Sboxes=[]
         divided_masks=[]
-        contours,_ = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        _,contours,_ = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
         for cnt in contours:
             # separate the masks based on their contours
             canvas = np.zeros_like(mask)
