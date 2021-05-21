@@ -33,6 +33,8 @@ class dataExtraction(Config):
             # separate the masks based on their contours
             canvas = np.zeros_like(mask)
             cv2.drawContours(canvas,[cnt], 0, 255, -1)
+            # import ipdb; ipdb.set_trace()
+            # cv2.imwrite("canvas.png",canvas);
             divided_masks.append(canvas)
             rect = cv2.minAreaRect(cnt)
             box = cv2.boxPoints(rect)  
@@ -51,7 +53,14 @@ class dataExtraction(Config):
         rotate_kernel = cv2.getRotationMatrix2D(tuple(self.center),rotate_angle,1)
         rotate_masks=[]
         for mask in divided_masks:
+            # import ipdb; ipdb.set_trace()
+            # cv2.imwrite("mask_before.png", mask)
             rotate_mask = cv2.warpAffine(mask,rotate_kernel,self.img_size,borderValue=0)
+            # import ipdb; ipdb.set_trace()
+            cv2.imwrite("mask_after.png", rotate_mask);
+            _,rotate_mask = cv2.threshold(rotate_mask, 128, 255, cv2.THRESH_BINARY)
+            cv2.imwrite("mask_after_thres.png", rotate_mask);
+
             rotate_masks.append(rotate_mask)
           
         for x in range(0,self.img_size[0],self.stride):

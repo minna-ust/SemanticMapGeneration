@@ -66,6 +66,12 @@ class orig_map(Config):
             map_trunk.doors(complete_map,mask)
                 
             maps.append(complete_map)
+            # cv2.imshow("mask", mask)
+            # cv2.waitKey(0)
+            # import ipdb; ipdb.set_trace()
+            # from scipy import stats
+            # stats.describe(mask)
+            # cv2.imwrite("mask.png", mask)
             masks.append(mask)
       
         return maps,masks

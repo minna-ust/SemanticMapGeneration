@@ -11,6 +11,7 @@ import numpy as np
 from orig_map import orig_map
 from addNoise import addNoise
 from dataExtraction import dataExtraction
+import cv2
 
 def main(map_num,noise_types,noise_levels,mode):
     """
@@ -21,9 +22,12 @@ def main(map_num,noise_types,noise_levels,mode):
     mode: 0-background, 1-doorway
     """
     map_sim = orig_map()
+    import ipdb; ipdb.set_trace()
     maps,masks = map_sim.creater(map_num)
     extract = dataExtraction()
     for single_map,single_mask in zip(maps,masks):
+        # import ipdb; ipdb.set_trace()
+        # cv2.imwrite("single_mask.png", single_mask);
         noised_maps = []
         rotate_angle = np.random.randint(0,360)
         addnoise = addNoise(single_map)
