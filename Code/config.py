@@ -36,8 +36,8 @@ class Config():
     x_gap = 0.6
     y_gap = 0.4
     # the upper limit of the number of generated data
-    cnn_num = 1000
-    unet_num = 1000
+    cnn_num = 10000
+    unet_num = 10000
     # the stride of sliding window for dataExtraction
     stride =8
     # the size of sliding window

@@ -118,6 +118,7 @@ class dataExtraction(Config):
                                                     mask_area = mask_area+rotate_masks[index][x:x+self.window_size,y:y+self.window_size]
                                                 # doorway region for u-net
                                                 path = self.dir_path[1]+'_'+str(n)+str(l)+'/imgs/'
+                                                # import ipdb; ipdb.set_trace()
                                                 utils.mkdir(path)
                                                 cv2.imwrite(path+str(self.unet_count)+'.png',proxi_area)
                                                 # import ipdb; ipdb.set_trace()

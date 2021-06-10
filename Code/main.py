@@ -42,6 +42,8 @@ def main(map_num,noise_types,noise_levels,mode):
         extract.data(noised_maps,ref_map,single_mask,rotate_angle,mode)
         
 if __name__=='__main__': 
-    noise_types = ['combindNoise','GaussNoise']
-    noise_levels = [1,4,7]
-    main(10,noise_types,noise_levels,1)
+    # noise_types = ['combindNoise','GaussNoise']
+    noise_types = ['combindNoise']
+    # noise_levels = [1,4,7]
+    noise_levels = [4]
+    main(10000,noise_types,noise_levels,1)
